@@ -1,25 +1,41 @@
-%form{action: "/", enctype: "multipart/form-data", method: "post"}
-  %input{name: "file", :type => "file"}/
-  %input{name: "submit", type: "submit", value: "Upload"}/
-- if @rows and @total
-  %table{cellpadding: "8"}
-    %tr{style: "background-color: #ddd"}
-      %th #
-      %th Purchasee
-      %th Description
-      %th $
-      %th Qty
-      %th Merch name
-      %th Merch address
-    - @rows.each do |row|
-      %tr
-        %td= row[:id]
-        %td= row[:purchaser_name]
-        %td= row[:item_description]
-        %td= row[:item_price]
-        %td
-          $#{row[:purchase_count]}
-        %td= row[:merchant_name]
-        %td= row[:merchant_address]
-  %h2
-    Total $#{"%.2f" % @total}
+!!! 5
+%html
+
+  %head
+    %title 'LivingSocial Data Engineering challenge'
+    %link{ :href => "/stylesheets/app.css", :media => "screen", :rel => "stylesheet" }
+
+  %body
+    %header
+
+    %section#form
+      %form{action: "/", enctype: "multipart/form-data", method: "post"}
+        %input{name: "file", :type => "file"}/
+        %input{name: "submit", type: "submit", value: "Upload"}/
+
+    - if @rows and @total
+      %section#result
+        %br
+        %table
+          %thead
+            %tr
+              %th #
+              %th Purchaser
+              %th Description
+              %th $
+              %th Qty
+              %th Merch name
+              %th Merch address
+          %tbody
+            - @rows.each do |row|
+              %tr
+                %td= row.id
+                %td= row.purchaser.name
+                %td= row.item.description
+                %td
+                  $#{row.item.price}
+                %td= row.item_count
+                %td= row.merchant.name
+                %td= row.merchant.address
+        %h2
+          Total $#{"%.2f" % @total}

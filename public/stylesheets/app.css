@@ -1,0 +1,19 @@
+body {
+  font-family: Helvetica, Arial;
+  font-size: 0.9em;
+  margin: 0 auto;
+  width: 960px;
+}
+
+body header {
+  height: 60px;
+}
+
+table thead tr {
+  background-color: #ddd;
+}
+
+table th, table td {
+  border: 1px solid #aaa;
+  padding: 10px;
+}
